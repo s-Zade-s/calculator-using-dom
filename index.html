@@ -1,0 +1,64 @@
+document.addEventListener("DOMContentLoaded", function(){
+   <!-- Make a calculation between two numbers and see the result for all four operations -->
+
+   <!-- Make two variables called number1 and number2 -->
+   var number1 = null;
+  var number2 = null;
+   <!-- Save the value of this operation in a variable -->
+  var operator = null;
+   <!-- Be able to press a number button and see that number in the screen -->
+   <!-- Be able to press another number button and see that number in the screen -->
+     <!-- Add a click event listener so that when you click a number button, its innerHTML (the number itself) goes into the screen -->
+    var display = document.getElementById("screen");
+    var numberButtons = document.getElementsByClassName("buttonNum");
+    for (var i = 0; i < numberButtons.length; i++) {
+      numberButtons[i].addEventListener("click", displayNumber);
+    }
+
+    function displayNumber(){
+       <!-- IF number1 is null, save the value of this number in number1 ELSE IF number1 is not null, save the value of this number in number2 -->
+      display.innerHTML = this.innerHTML;
+      if(number1 == null) {
+        number1 = this.innerHTML;
+      } else {
+        number2 = this.innerHTML;
+      }
+    }
+
+   <!-- Be able to press an operator button and see that operator in the screen -->
+     <!-- Add a click event listener so that when you click an operator button, its innerHTML (the symbol of the operation) goes into the screen IF the screen's innerHTML is NOT Sparta Calculator (if there's already a number or operator on the screen) -->
+    var operatorButtons = document.getElementsByClassName("operator");
+    for (var i = 0; i < operatorButtons.length; i++) {
+      operatorButtons[i].addEventListener("click", displayOperator);
+    }
+
+    function displayOperator() {
+      if(display.innerHTML != "Sparta Calculator"){
+        display.innerHTML = this.innerHTML;
+        operator = this.innerHTML;
+      }
+    }
+
+   <!-- Be able to press the equals button and see the result of the operation between the two numbers I pressed -->
+     <!-- Add a click event listener to the equals button -->
+    var equalsButton = document.getElementsByClassName("equals")[0];
+    equalsButton.addEventListener("click", displayResult);
+
+    function displayResult(){
+       <!-- Call the eval function with number1, number2 and operator passed in and put the result into the screen -->
+      display.innerHTML = eval(number1 + operator + number2);
+    }
+
+   <!-- Be able to press the AC button and clear the screen so I can perform another operation on two new numbers -->
+    var clearButton = document.getElementsByClassName("buttonClear")[0];
+     <!-- Add a click event listener so that the screen goes back to Sparta Calculator and number1, number2 and operator are reset to null -->
+    clearButton.addEventListener("click", clearScreen);
+
+    function clearScreen() {
+      display.innerHTML = "Sparta Calculator";
+      number1 = null;
+      number2 = null;
+      operator = null;
+      debugger;
+    }
+});
